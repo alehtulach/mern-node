@@ -1,4 +1,4 @@
-const whiteList = ["https://www.google.com"];
+const whiteList = ["http://localhost:8080"];
 
 const corsOptions = {
   origin: (origin, callback) => {
