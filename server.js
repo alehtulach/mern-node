@@ -19,7 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
 
-app.use("/register", require("./routs/api/register"));
+app.use("/register", require("./routs/register"));
+app.use("/auth", require("./routs/auth"));
 
 app.all("*", (req, res) => {
   res.status(404).send("404 Not Found");
