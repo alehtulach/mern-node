@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const connectDB = require("./config/dbConn");
 const errorHandler = require("./middleware/errorHandler");
 const corsOptions = require("./config/corsOptions");
+const verifyJWT = require("./middleware/verifyJWT");
 
 const PORT = process.env.PORT || 3500;
 
@@ -19,8 +20,12 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
 
-app.use("/register", require("./routs/register"));
-app.use("/auth", require("./routs/auth"));
+app.use("/register", require("./routes/register"));
+app.use("/auth", require("./routes/auth"));
+app.use("/refresh", require("./routes/refresh"));
+
+app.use(verifyJWT);
+app.use("/users", require("./routes/api/users"));
 
 app.all("*", (req, res) => {
   res.status(404).send("404 Not Found");
