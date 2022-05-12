@@ -2,15 +2,19 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const connectDB = require("./config/dbConn");
 const errorHandler = require("./middleware/errorHandler");
 const corsOptions = require("./config/corsOptions");
+const credentials = require("./middleware/credentials");
 const verifyJWT = require("./middleware/verifyJWT");
 
 const PORT = process.env.PORT || 3500;
 
 connectDB();
+
+app.use(credentials);
 
 // Cross Origin Resource Sharing
 app.use(cors(corsOptions));
@@ -19,6 +23,8 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
+
+app.use(cookieParser());
 
 app.use("/register", require("./routes/register"));
 app.use("/auth", require("./routes/auth"));
