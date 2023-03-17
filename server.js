@@ -10,6 +10,7 @@ const corsOptions = require("./config/corsOptions");
 const credentials = require("./middleware/credentials");
 const verifyJWT = require("./middleware/verifyJWT");
 
+// just some unused comment for testing purpose
 const PORT = process.env.PORT || 3500;
 
 connectDB();
